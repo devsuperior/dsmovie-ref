@@ -1,13 +1,29 @@
 package com.devsuperior.dsmovie.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.URL;
+
 import com.devsuperior.dsmovie.entities.Movie;
 
 public class MovieDTO {
 
 	private Long id;
+	
+	@NotBlank(message = "Required field")
+	@Size(min = 5, max = 80, message = "Title must be between 5 and 80 characters")
 	private String title;
+	
+	@PositiveOrZero(message = "Score should be greater than or equal to zero")
 	private Double score;
+	
+	@PositiveOrZero(message = "Count should be greater than or equal to zero")
 	private Integer count;
+	
+	@NotBlank(message = "Required field")
+	@URL(message = "Field must be a valid url")
 	private String image;
 
 	public MovieDTO() {
