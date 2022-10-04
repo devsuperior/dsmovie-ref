@@ -2,11 +2,12 @@ package com.devsuperior.dsmovie.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 public class ScoreDTO {
 
-	@NotBlank(message = "Required field")
+	@NotNull(message = "Required field")
 	private Long movieId;
 
 	@NotBlank(message = "Required field")
