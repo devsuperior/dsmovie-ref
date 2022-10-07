@@ -23,7 +23,7 @@ The following features are preconfigured.
 - Exception handling: Database error (*400 bad request*)
 
 ### Spring Boot versions
-- 3.0.0-SNAPSHOT
+- 3.0.0-M2
 - 2.7.3
 
 
