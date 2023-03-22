@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_movie")
-public class Movie {
+public class MovieEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +24,12 @@ public class Movie {
 	private String image;
 	
 	@OneToMany(mappedBy = "id.movie")
-	private Set<Score> scores = new HashSet<>();
+	private Set<ScoreEntity> scores = new HashSet<>();
 	
-	public Movie() {
+	public MovieEntity() {
 	}
 
-	public Movie(Long id, String title, Double score, Integer count, String image) {
+	public MovieEntity(Long id, String title, Double score, Integer count, String image) {
 		this.id = id;
 		this.title = title;
 		this.score = score;
@@ -77,7 +77,7 @@ public class Movie {
 		this.image = image;
 	}
 
-	public Set<Score> getScores() {
+	public Set<ScoreEntity> getScores() {
 		return scores;
 	}
 
@@ -94,7 +94,7 @@ public class Movie {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Movie other = (Movie) obj;
+		MovieEntity other = (MovieEntity) obj;
 		return Objects.equals(id, other.id);
 	}
 }

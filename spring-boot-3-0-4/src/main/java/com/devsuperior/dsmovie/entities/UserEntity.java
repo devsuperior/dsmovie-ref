@@ -21,7 +21,7 @@ import jakarta.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "tb_user")
-public class User implements UserDetails {
+public class UserEntity implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,12 +34,12 @@ public class User implements UserDetails {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> authorities = new HashSet<>();
+	private Set<RoleEntity> authorities = new HashSet<>();
 
-	public User() {
+	public UserEntity() {
 	}
 
-	public User(Long id, String name, String username, String password) {
+	public UserEntity(Long id, String name, String username, String password) {
 		this.id = id;
 		this.name = name;
 		this.username = username;

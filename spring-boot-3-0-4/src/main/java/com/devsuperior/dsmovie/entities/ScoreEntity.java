@@ -9,30 +9,30 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_score")
-public class Score {
+public class ScoreEntity {
 
 	@EmbeddedId
-	private ScorePK id = new ScorePK();
+	private ScoreEntityPK id = new ScoreEntityPK();
 	
 	@Column(name = "score_value")
 	private Double value;
 	
-	public Score() {
+	public ScoreEntity() {
 	}
 	
-	public void setMovie(Movie movie) {
+	public void setMovie(MovieEntity movie) {
 		id.setMovie(movie);
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserEntity user) {
 		id.setUser(user);
 	}
 	
-	public ScorePK getId() {
+	public ScoreEntityPK getId() {
 		return id;
 	}
 
-	public void setId(ScorePK id) {
+	public void setId(ScoreEntityPK id) {
 		this.id = id;
 	}
 
@@ -57,7 +57,7 @@ public class Score {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Score other = (Score) obj;
+		ScoreEntity other = (ScoreEntity) obj;
 		return Objects.equals(id, other.id);
 	}
 }

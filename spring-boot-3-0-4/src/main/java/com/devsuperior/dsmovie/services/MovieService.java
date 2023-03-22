@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.dsmovie.dto.MovieDTO;
-import com.devsuperior.dsmovie.entities.Movie;
+import com.devsuperior.dsmovie.entities.MovieEntity;
 import com.devsuperior.dsmovie.repositories.MovieRepository;
 import com.devsuperior.dsmovie.services.exceptions.DatabaseException;
 import com.devsuperior.dsmovie.services.exceptions.ResourceNotFoundException;
@@ -25,21 +25,21 @@ public class MovieService {
 
 	@Transactional(readOnly = true)
 	public Page<MovieDTO> findAll(Pageable pageable) {
-		Page<Movie> result = repository.findAll(pageable);
+		Page<MovieEntity> result = repository.findAll(pageable);
 		Page<MovieDTO> page = result.map(x -> new MovieDTO(x));
 		return page;
 	}
 
 	@Transactional(readOnly = true)
 	public MovieDTO findById(Long id) {
-		Movie result = repository.findById(id)
+		MovieEntity result = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
 		return new MovieDTO(result);
 	}
 
 	@Transactional
 	public MovieDTO insert(MovieDTO dto) {
-		Movie entity = dto.toEntity();
+		MovieEntity entity = dto.toEntity();
 		entity = repository.save(entity);
 		return new MovieDTO(entity);
 	}
@@ -47,7 +47,7 @@ public class MovieService {
 	@Transactional
 	public MovieDTO update(Long id, MovieDTO dto) {
 		try {
-			Movie entity = repository.getReferenceById(id);
+			MovieEntity entity = repository.getReferenceById(id);
 			copyDtoToEntity(dto, entity);
 			entity = repository.save(entity);
 			return new MovieDTO(entity);
@@ -67,7 +67,7 @@ public class MovieService {
 		}
 	}
 
-	private void copyDtoToEntity(MovieDTO dto, Movie entity) {
+	private void copyDtoToEntity(MovieDTO dto, MovieEntity entity) {
 		entity.setTitle(dto.getTitle());
 		entity.setScore(dto.getScore());
 		entity.setCount(dto.getCount());

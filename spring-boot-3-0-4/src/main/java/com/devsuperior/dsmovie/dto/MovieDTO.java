@@ -2,7 +2,7 @@ package com.devsuperior.dsmovie.dto;
 
 import org.hibernate.validator.constraints.URL;
 
-import com.devsuperior.dsmovie.entities.Movie;
+import com.devsuperior.dsmovie.entities.MovieEntity;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -37,7 +37,7 @@ public class MovieDTO {
 		this.image = image;
 	}
 
-	public MovieDTO(Movie movie) {
+	public MovieDTO(MovieEntity movie) {
 		id = movie.getId();
 		title = movie.getTitle();
 		score = movie.getScore();
@@ -85,7 +85,7 @@ public class MovieDTO {
 		this.image = image;
 	}
 
-	public Movie toEntity() {
-		return new Movie(id, title, score, count, image);
+	public MovieEntity toEntity() {
+		return new MovieEntity(id, title, score, count, image);
 	}
 }

@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.devsuperior.dsmovie.entities.User;
+import com.devsuperior.dsmovie.entities.UserEntity;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-	Optional<User> findByUsername(String username);
+	Optional<UserEntity> findByUsername(String username);
 }

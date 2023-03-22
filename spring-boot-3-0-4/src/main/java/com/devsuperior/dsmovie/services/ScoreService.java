@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.dsmovie.dto.MovieDTO;
 import com.devsuperior.dsmovie.dto.ScoreDTO;
-import com.devsuperior.dsmovie.entities.Movie;
-import com.devsuperior.dsmovie.entities.Score;
-import com.devsuperior.dsmovie.entities.User;
+import com.devsuperior.dsmovie.entities.MovieEntity;
+import com.devsuperior.dsmovie.entities.ScoreEntity;
+import com.devsuperior.dsmovie.entities.UserEntity;
 import com.devsuperior.dsmovie.repositories.MovieRepository;
 import com.devsuperior.dsmovie.repositories.ScoreRepository;
 import com.devsuperior.dsmovie.repositories.UserRepository;
@@ -28,16 +28,16 @@ public class ScoreService {
 	@Transactional
 	public MovieDTO saveScore(ScoreDTO dto) {
 		
-		User user = userRepository.findByUsername(dto.getEmail()).orElse(null);
+		UserEntity user = userRepository.findByUsername(dto.getEmail()).orElse(null);
 		if (user == null) {
-			user = new User();
+			user = new UserEntity();
 			user.setUsername(dto.getEmail());
 			user = userRepository.saveAndFlush(user);
 		}
 		
-		Movie movie = movieRepository.findById(dto.getMovieId()).get();
+		MovieEntity movie = movieRepository.findById(dto.getMovieId()).get();
 		
-		Score score = new Score();
+		ScoreEntity score = new ScoreEntity();
 		score.setMovie(movie);
 		score.setUser(user);
 		score.setValue(dto.getScore());
@@ -45,7 +45,7 @@ public class ScoreService {
 		score = scoreRepository.saveAndFlush(score);
 		
 		double sum = 0.0;
-		for (Score s : movie.getScores()) {
+		for (ScoreEntity s : movie.getScores()) {
 			sum = sum + s.getValue();
 		}
 			
