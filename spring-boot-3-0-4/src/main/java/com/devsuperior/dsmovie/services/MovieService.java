@@ -39,7 +39,8 @@ public class MovieService {
 
 	@Transactional
 	public MovieDTO insert(MovieDTO dto) {
-		MovieEntity entity = dto.toEntity();
+		MovieEntity entity = new MovieEntity();
+		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new MovieDTO(entity);
 	}

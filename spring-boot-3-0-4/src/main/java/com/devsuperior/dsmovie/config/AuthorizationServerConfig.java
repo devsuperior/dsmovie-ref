@@ -155,7 +155,11 @@ public class AuthorizationServerConfig {
 			CustomUserAuthorities user = (CustomUserAuthorities) principal.getDetails();
 			List<String> authorities = user.getAuthorities().stream().map(x -> x.getAuthority()).toList();
 			if (context.getTokenType().getValue().equals("access_token")) {
-				context.getClaims().claim("authorities", authorities).claim("user", user.getUsername());
+				// @formatter:off
+				context.getClaims()
+					.claim("authorities", authorities)
+					.claim("user", user.getUsername());
+				// @formatter:on
 			}
 		};
 	}

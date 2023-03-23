@@ -1,46 +1,32 @@
 package com.devsuperior.dsmovie.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
 public class ScoreDTO {
+	
+	private static final DecimalFormat df = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
 
 	@NotNull(message = "Required field")
 	private Long movieId;
 
-	@NotBlank(message = "Required field")
-	@Email(message = "Email should be valid")
-	private String email;
-	
 	@PositiveOrZero(message = "Score should be greater than or equal to zero")
 	private Double score;
-	
-	public ScoreDTO() {
-	}
 
+	public ScoreDTO(Long movieId, Double score) {
+		this.movieId = movieId;
+		this.score = Double.valueOf(df.format(score));
+	}
+	
 	public Long getMovieId() {
 		return movieId;
 	}
 
-	public void setMovieId(Long movieId) {
-		this.movieId = movieId;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public Double getScore() {
 		return score;
-	}
-
-	public void setScore(Double score) {
-		this.score = score;
 	}
 }

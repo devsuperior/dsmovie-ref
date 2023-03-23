@@ -11,16 +11,15 @@ import com.devsuperior.dsmovie.entities.ScoreEntity;
 import com.devsuperior.dsmovie.entities.UserEntity;
 import com.devsuperior.dsmovie.repositories.MovieRepository;
 import com.devsuperior.dsmovie.repositories.ScoreRepository;
-import com.devsuperior.dsmovie.repositories.UserRepository;
 
 @Service
 public class ScoreService {
 
 	@Autowired
-	private MovieRepository movieRepository;
+	private UserService userService;
 	
 	@Autowired
-	private UserRepository userRepository;
+	private MovieRepository movieRepository;
 	
 	@Autowired
 	private ScoreRepository scoreRepository;
@@ -28,12 +27,7 @@ public class ScoreService {
 	@Transactional
 	public MovieDTO saveScore(ScoreDTO dto) {
 		
-		UserEntity user = userRepository.findByUsername(dto.getEmail()).orElse(null);
-		if (user == null) {
-			user = new UserEntity();
-			user.setUsername(dto.getEmail());
-			user = userRepository.saveAndFlush(user);
-		}
+		UserEntity user = userService.authenticated();
 		
 		MovieEntity movie = movieRepository.findById(dto.getMovieId()).get();
 		

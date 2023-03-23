@@ -1,5 +1,9 @@
 package com.devsuperior.dsmovie.dto;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 import org.hibernate.validator.constraints.URL;
 
 import com.devsuperior.dsmovie.entities.MovieEntity;
@@ -9,6 +13,8 @@ import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
 public class MovieDTO {
+
+	private static final DecimalFormat df = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
 
 	private Long id;
 	
@@ -26,66 +32,35 @@ public class MovieDTO {
 	@URL(message = "Field must be a valid url")
 	private String image;
 
-	public MovieDTO() {
-	}
-
 	public MovieDTO(Long id, String title, Double score, Integer count, String image) {
 		this.id = id;
 		this.title = title;
-		this.score = score;
+		this.score = Double.valueOf(df.format(score));
 		this.count = count;
 		this.image = image;
 	}
 
 	public MovieDTO(MovieEntity movie) {
-		id = movie.getId();
-		title = movie.getTitle();
-		score = movie.getScore();
-		count = movie.getCount();
-		image = movie.getImage();
+		this(movie.getId(), movie.getTitle(), movie.getScore(), movie.getCount(), movie.getImage());
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getTitle() {
 		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public Double getScore() {
 		return score;
 	}
-
-	public void setScore(Double score) {
-		this.score = score;
-	}
-
+	
 	public Integer getCount() {
 		return count;
 	}
 
-	public void setCount(Integer count) {
-		this.count = count;
-	}
-
 	public String getImage() {
 		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public MovieEntity toEntity() {
-		return new MovieEntity(id, title, score, count, image);
 	}
 }
