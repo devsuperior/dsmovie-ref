@@ -2,17 +2,18 @@
 >  *This repository aims to provide the Reference project DSMovie to be used in DevSuperior courses*
 
 ## Postman Collection and Environment:
-https://www.getpostman.com/collections/8494dbba70a92f54870b
+
+(the files are in the root folder of this repository)
+
+(os arquivo estão na pasta raiz deste repositório)
+
 ```
 host: http://localhost:8080
 ```
 ## Domain Model
-![Image](https://raw.githubusercontent.com/devsuperior/bds-assets/main/sds/dsmovie-dominio.png "Modelo conceitual")
+![Image](https://raw.githubusercontent.com/devsuperior/bds-assets/main/sds/dsmovie-dominio.png "Domain Model")
 
-## Includes
-The following features are preconfigured.
-
-### Features
+## Project scope
 - Find movies
 - Find movies by id
 - Insert new movie
@@ -20,11 +21,4 @@ The following features are preconfigured.
 - Delete movie
 - Save review
 - Exception handling: resource not found (*404 not found*)
-- Exception handling: Database error (*400 bad request*)
-
-### Spring Boot versions
-- 3.0.0-M2
-- 2.7.3
-
-
-
+- Exception handling: database error (*400 bad request*)

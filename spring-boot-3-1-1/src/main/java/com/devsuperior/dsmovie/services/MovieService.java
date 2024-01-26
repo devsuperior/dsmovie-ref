@@ -2,7 +2,6 @@ package com.devsuperior.dsmovie.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -59,13 +58,15 @@ public class MovieService {
 
 	@Transactional(propagation = Propagation.SUPPORTS)
 	public void delete(Long id) {
-		try {
-			repository.deleteById(id);
-		} catch (EmptyResultDataAccessException e) {
+		if (!repository.existsById(id)) {
 			throw new ResourceNotFoundException("Recurso não encontrado");
-		} catch (DataIntegrityViolationException e) {
-			throw new DatabaseException("Falha de integridade referencial");
 		}
+		try {
+	        repository.deleteById(id);    		
+		}
+	    	catch (DataIntegrityViolationException e) {
+	        	throw new DatabaseException("Falha de integridade referencial");
+	   	}
 	}
 
 	private void copyDtoToEntity(MovieDTO dto, MovieEntity entity) {
